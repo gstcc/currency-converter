@@ -1,40 +1,45 @@
-import './App.css';
+import React, { useState } from 'react';
 import Exchange from './components/exchange';
 import SearchBar from './components/search';
-import React, { useState } from 'react';
-
+import { currencies } from './constants';
+import './App.css';
 
 function App() {
+  // State to track the selected currency for conversion
+  const [currencyFrom, setCurrencyFrom] = useState('');
+  const [currencyTo, setCurrencyTo] = useState('');
 
-  const [currencyFrom, setCurrencyFrom] = useState("");
-  const [currencyTo, setCurrencyTo] = useState("");
-
-  const data = { "from": currencyFrom, "to": currencyTo, "mode": "convert" };
-  const fromMessage = { "data": "Search for currency to convert from" };
-  const toMessage = { "data": "Search for currency to convert to" };
-
-  const handleSearchChange = (data) =>{
-    if(data.sender=="from"){setCurrencyFrom(data.option)}
-    else {setCurrencyTo(data.option)}
-  }
-
-  const convert = () => {
-    // Swap the values of currencyFrom and currencyTo
-    const currencyFromTemp = currencyFrom;
-    setCurrencyFrom(currencyTo);
-    setCurrencyTo(currencyFromTemp);
-    
+  // Function to handle changes in the search bars
+  const handleSearchChange = ({ sender, option }) => {
+    if (sender === 'from') {
+      setCurrencyFrom(option);
+    } else {
+      setCurrencyTo(option);
+    }
   };
 
   return (
     <div className="App">
-    <h1>Currency Converter</h1>
+      {/* Search Bars */}
       <div className='SearchBars'>
-        <SearchBar placeholder={fromMessage} onSearchChange={handleSearchChange} sender={"from"}/>
-        <SearchBar placeholder={toMessage} onSearchChange={handleSearchChange} sender={"to"} />
+        {/* Search Bar for currency to convert from */}
+        <SearchBar
+          placeholder={{ data: "Search for currency to convert from" }}
+          onSearchChange={handleSearchChange}
+          sender={"from"}
+          currency={currencyFrom}
+        />
+        {/* Search Bar for currency to convert to */}
+        <SearchBar
+          placeholder={{ data: "Search for currency to convert to" }}
+          onSearchChange={handleSearchChange}
+          sender={"to"}
+          currency={currencyTo}
+        />
       </div>
+      {/* Exchange Component */}
       <div className='Button'>
-        <Exchange data={data}/>
+        <Exchange data={{ from: currencyFrom, to: currencyTo, mode: 'convert' }} />
       </div>
     </div>
   );
