@@ -1,0 +1,41 @@
+/* Styles for the Exchange component container */
+.Exchange {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Styling for the numeric input field */
+  .Exchange input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  /* Styling for the Exchange button */
+  .Exchange button {
+    margin-top: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .Exchange button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for the converted amount */
+  .Exchange h1 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
