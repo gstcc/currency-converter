@@ -1,3 +1,5 @@
+currency converter that uses exchangerate.host api to convert currecies
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
