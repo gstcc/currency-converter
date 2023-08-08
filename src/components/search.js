@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { currencies } from '../constants';
 import "./search.css"
 
-const SearchBar = ({ placeholder, onSearchChange, sender, currency }) => {
+const SearchBar = ({ placeholder, onSearchChange, sender, swap, currencyToSwap }) => {
   // State to keep track of the current search term entered by the user
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   // State to control whether to show the options list
   const [showOptions, setShowOptions] = useState(false);
 
@@ -22,6 +22,13 @@ const SearchBar = ({ placeholder, onSearchChange, sender, currency }) => {
     setShowOptions(false); // Hide the options after clicking on one
     onSearchChange({ option, sender }); // Notify the parent component of the search term change
   };
+
+  // Update searchTerm based on currencyToSwap when swap changes
+  useEffect(() => {
+    if (swap) {
+      setSearchTerm(currencyToSwap);
+    }
+  }, [swap, currencyToSwap]);
 
   // Filter the options based on the current search term
   const filteredOptions = currencies.filter(option =>

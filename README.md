@@ -1,14 +1,17 @@
-Sure! Here's a short README for the project:
-
 # Currency Converter App
 
 This is a simple Currency Converter App built with React. It allows users to convert currency from one denomination to another using real-time exchange rates.
+
+![ScreenShot](/public/ScreenShot.png)
+
 
 ## Features
 
 - Search Bar: Users can search for currencies they want to convert from and to using the autocomplete feature.
 - Conversion: Users can enter the amount they want to convert and click the "Convert" button to get the converted amount.
+- Currency Swap: A "Swap" button is provided to quickly switch the currencies to convert from and to.
 - Real-Time Exchange Rates: The app fetches real-time exchange rates from an external API to perform the currency conversion.
+- Historical Exchange Rate Graph: The app displays a historical exchange rate graph that shows the changes in the exchange rate over time.
 
 ## Installation
 

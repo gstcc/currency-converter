@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import './exchange.css';
 
 const Exchange = ({ data }) => {
+
   // State to store the input value for conversion
   const [numberValue, setNumberValue] = useState('');
-  
   // State to store the converted amount
   const [convertedAmount, setConvertedAmount] = useState('');
+  // States to display conversion
+  const [text, setText] = useState({})
 
   // Function to handle changes in the input field
   const handleInputChange = (event) => {
@@ -18,6 +20,7 @@ const Exchange = ({ data }) => {
 
   // Function to fetch the converted currency data
   const getCurrency = () => {
+    console.log(data)
     const request = new XMLHttpRequest();
     request.open('GET', `${EXCHANGE_API_URL}/${data.mode}?from=${data.from}&to=${data.to}&amount=${numberValue}&places=2`);
     request.responseType = 'json';
@@ -25,8 +28,16 @@ const Exchange = ({ data }) => {
 
     request.onload = function () {
       const response = request.response;
+      console.log(response)
       setConvertedAmount(response.result);
-    };
+
+      setText({
+        "dataFrom": data.from,
+        "numberValue": numberValue,
+        "convertedAmount": response.result,
+        "dataTo": data.to
+      });
+    }
   };
 
   return (
@@ -45,9 +56,9 @@ const Exchange = ({ data }) => {
         {data.mode}
       </button>
       {/* Display the converted amount if all required data is available */}
-      {numberValue && data.from && convertedAmount && data.to && (
+      {text.dataFrom && text.numberValue && text.convertedAmount && text.dataTo && (
         <h1>
-          {numberValue} {data.from} is {convertedAmount} {data.to}
+          {text.numberValue} {text.dataFrom} is {text.convertedAmount} {text.dataTo}
         </h1>
       )}
     </div>
